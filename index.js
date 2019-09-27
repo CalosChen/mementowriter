@@ -64,6 +64,7 @@ function main() {
     app.post('/cate', function (req, res, next) {
         const { cate } = req.body
         mkCate(cate)
+        res.send(cate)
     })
 
     app.get('/mds', function (req, res, next) {

@@ -44,9 +44,10 @@
             switch (key) {
                 case 'c':
                     if (val) {
-                        mkCate(val).then(() => {
+                        mkCate(val).then(function () {
                             getCates()
                         })
+
                     }
                     break;
                 case 'a':
