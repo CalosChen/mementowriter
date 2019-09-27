@@ -50,7 +50,10 @@
                     }
                     break;
                 case 'a':
-                    iframe.src = "view.html?name=" + val;
+                    current.name = val
+                    save(current.cate, val, '').then(function () {
+                        getMds(cate.name)
+                    })
                     break;
 
                 default:
@@ -102,7 +105,7 @@
         }
         function save(cate, name, content) {
             if (!name) return
-            $.post('/md', { cate, name, content }, function (data) {
+            return $.post('/md', { cate, name, content }, function (data) {
 
             })
         }
