@@ -1,0 +1,61 @@
+$common-height: 150px;
+@mixin with100minus($px) {
+  width: calc(100% - #{$px});
+}
+@mixin height100($px) {
+  height: calc(100% - #{$px});
+}
+* {
+  box-sizing: border-box;
+}
+h1 {
+  color: red;
+}
+ul li {
+  list-style-type: none;
+}
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: right;
+  a {
+    margin-left: 15px;
+    display: block;
+  }
+  a:first-child {
+    margin-left: 0;
+  }
+}
+div {
+  float: left;
+}
+.menu {
+  width: 200px;
+  height: $common-height;
+}
+.main {
+  @include with100minus(200px);
+  @include height100(200px);
+  background-color: orange;
+}
+iframe {
+  width: 100%;
+  min-height: 500px;
+}
+footer {
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+}
+button {
+  border-radius: 5px;
+}
+#cates {
+  li {
+    float: left;
+    margin-left: 15px;
+  }
+}

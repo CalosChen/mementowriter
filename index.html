@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Caloch开洛奇</h1>
+    <nav>
+        <button onclick="add('c',prompt('Category:'));">+</button>
+        <ul id="cates">
+            <li><a href="#" data-cate="cate">cate</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <div class="menu">
+        <button onclick="add('a',prompt('Name:'));">+</button>
+        <ul id="mds">
+            <li><a href="view.html?name='a1'" target="mainframe">文章.1</a></li>
+        </ul>
+    </div>
+    <div id="main" class="main">
+        <iframe id="#mainframe" name="mainframe" src="" frameborder="0"></iframe>
+    </div>
+    <div id="main1" class="main">
+        <textarea id="content" cols="20" rows="10"></textarea>
+        <button id="save">Save</button>
+    </div>
+    <footer>
+        ©Caloch开洛奇 2019~
+        <span id="today"></span>
+    </footer>
+    <script>
+        var current = {}
+
+        function add(key, val) {
+            var iframe = document.getElementById('#mainframe')
+            switch (key) {
+                case 'c':
+                    if (val) {
+                        mkCate(val)
+                        getCates()
+                    }
+                    break;
+                case 'a':
+                    iframe.src = "view.html?name=" + val;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        function getCates() {
+            $.get('/cates', function (data) {
+                let $el = $('#cates')
+                $el.empty()
+                data.forEach(cate => {
+                    $el.append(`<li><a href="#" data-cate="${cate}">${cate}</a></li>`);
+                });
+                current.cate = data[0]
+                getMds(data[0])
+            })
+        }
+
+        function mkCate(cate) {
+            if (!cate) return
+            $.post('/cate', { cate }, function (data) {
+
+            })
+        }
+
+        function getMds(cate) {
+            $.get('/mds?cate=' + cate, function (data) {
+                let $el = $('#mds')
+                $el.empty()
+                data.forEach(function (md) {
+                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span data-name=${md}>Edit</span></li>`)
+                })
+            })
+        }
+
+        function getMdHtml(cate, name) {
+            $.get('/mdhtml?cate=' + cate + '&name=' + name, function (data) {
+                let $el = $('#main')
+                $el.html(data)
+            })
+        }
+
+        function getMd(cate, name, callback) {
+            $.get('/md?cate=' + cate + '&name=' + name, function (data) {
+                let $el = $('#content')
+                $el.text(data)
+            })
+        }
+        function save(cate, name, content) {
+            if (!name) return
+            $.post('/md', { cate, name, content }, function (data) {
+
+            })
+        }
+
+        $.fn.timelyfy = function () {
+            let $this = $(this)
+            $this.html(new Date().toLocaleDateString())
+        }
+
+        function showContent() {
+            $('#main').show()
+            $('#main1').hide()
+        }
+
+        function showEditor() {
+            $('#main1').show()
+            $('#main').hide()
+        }
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    console.log(xhr)
+                },
+                dataFilter: function (data) {
+                    console.log(data)
+                    return data
+                }
+            })
+            $('#today').timelyfy()
+            $('#main1').hide()
+            getCates()
+            $('#cates').on('click', 'a', function () {
+                let $this = $(this)
+                current.cate = $this.data().cate
+                getMds(current.cate)
+            })
+            $('#mds').on('click', 'a', function () {
+                let $this = $(this)
+                current.name = $this.data().name
+                console.log(current);
+                
+                getMdHtml(current.cate, current.name)
+                showContent()
+
+            })
+            $('#mds').on('click', 'span', function () {
+                let $this = $(this)
+                getMd(current.cate, $this.data().name)
+                showEditor()
+            })
+            $('#save').on('click', function () {
+                save(current.cate, current.name, $('#content').val())
+            })
+        })
+
+    </script>
+</body>
+
+</html>
