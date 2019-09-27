@@ -44,8 +44,9 @@
             switch (key) {
                 case 'c':
                     if (val) {
-                        mkCate(val)
-                        getCates()
+                        mkCate(val).then(() => {
+                            getCates()
+                        })
                     }
                     break;
                 case 'a':
@@ -71,7 +72,7 @@
 
         function mkCate(cate) {
             if (!cate) return
-            $.post('/cate', { cate }, function (data) {
+            return $.post('/cate', { cate }, function (data) {
 
             })
         }
@@ -143,7 +144,7 @@
                 let $this = $(this)
                 current.name = $this.data().name
                 console.log(current);
-                
+
                 getMdHtml(current.cate, current.name)
                 showContent()
 
