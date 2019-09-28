@@ -69,7 +69,7 @@ function main() {
     app.post('/auth', function (req, res, next) {
         if (req.body.key === 'demo')
             res.cookie("username", "admin", { maxAge: 60 * 60 * 1000, signed: true });
-        res.redirect('/')
+        res.send('OK')
     })
 
     app.get('/logout', function (req, res, next) {

@@ -41,7 +41,8 @@
 
         function admin(key) {
             $.post('/auth', { key }, function (data) {
-                console.log('login:' + data);
+                if (data === 'OK')
+                    $('button').show()
             })
         }
 
@@ -141,6 +142,7 @@
                     return data
                 }
             })
+            $('button').hide()
             $('#today').timelyfy()
             $('#main1').hide()
             getCates()
