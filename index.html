@@ -39,8 +39,13 @@
     <script>
         var current = {}
 
+        function admin(key) {
+            $.post('/auth', { key }, function (data) {
+                console.log('login:' + data);
+            })
+        }
+
         function add(key, val) {
-            var iframe = document.getElementById('#mainframe')
             switch (key) {
                 case 'c':
                     if (val) {
