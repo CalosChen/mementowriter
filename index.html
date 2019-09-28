@@ -42,7 +42,7 @@
         function admin(key) {
             $.post('/auth', { key }, function (data) {
                 if (data === 'OK')
-                    $('button').show()
+                    showAdms()
             })
         }
 
@@ -92,7 +92,7 @@
                 let $el = $('#mds')
                 $el.empty()
                 data.forEach(function (md) {
-                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span data-name=${md}>Edit</span></li>`)
+                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span class="admin" data-name=${md}>Edit</span></li>`)
                 })
             })
         }
@@ -132,6 +132,13 @@
             $('#main').hide()
         }
 
+        function showAdms() {
+            $('button,.admin').show()
+        }
+        function hideAdms() {
+            $('button,.admin').hide()
+        }
+
         $(document).ready(function () {
             $.ajaxSetup({
                 beforeSend: function (xhr, settings) {
@@ -142,7 +149,7 @@
                     return data
                 }
             })
-            $('button').hide()
+            hideAdms()
             $('#today').timelyfy()
             $('#main1').hide()
             getCates()
