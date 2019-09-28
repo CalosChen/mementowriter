@@ -92,7 +92,7 @@
                 let $el = $('#mds')
                 $el.empty()
                 data.forEach(function (md) {
-                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span class="admin" data-name=${md}>Edit</span></li>`)
+                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span data-name=${md}>Edit</span></li>`)
                 })
             })
         }
@@ -133,10 +133,10 @@
         }
 
         function showAdms() {
-            $('button,.admin').show()
+            $('button').show()
         }
         function hideAdms() {
-            $('button,.admin').hide()
+            $('button').hide()
         }
 
         $(document).ready(function () {
