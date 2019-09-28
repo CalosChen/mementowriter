@@ -7,6 +7,7 @@ var md = new markdown({
     html: true,
     langPrefix: 'code-',
 })
+const config = require('./pass.json')
 
 function mkCate(cate) {
     fs.mkdir(path.join(basePath, cate), function (err) {
@@ -41,6 +42,10 @@ function readMdFileToHtml(fileName, folderPath) {
     return html
 }
 
+function readPassFromFs() {
+    var keyPath = path.resolve()
+    return fs.readFileSync(keyPath, 'utf-8')
+}
 
 function main() {
     console.log('Starting web server')
@@ -54,7 +59,7 @@ function main() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
-    app.use(cookieParser('demotest'))
+    app.use(cookieParser(config.cookiePaser))
 
     app.use(function (req, res, next) {
         var username = req.signedCookies.username
@@ -67,7 +72,7 @@ function main() {
 
 
     app.post('/auth', function (req, res, next) {
-        if (req.body.key === 'demo')
+        if (req.body.key === config.pass)
             res.cookie("username", "admin", { maxAge: 60 * 60 * 1000, signed: true });
         res.send('OK')
     })
