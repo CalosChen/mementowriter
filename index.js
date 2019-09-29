@@ -59,7 +59,7 @@ function main() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
-    app.use(cookieParser(config.cookiePaser))
+    app.use(cookieParser(config.cookieParser))
 
     app.use(function (req, res, next) {
         var username = req.signedCookies.username
@@ -122,7 +122,7 @@ function main() {
     })
 
 
-    var server = app.listen(8081, function () {
+    var server = app.listen(8091, function () {
         const { address, port } = server.address()
         console.log('Listening on http://%s:%s', address, port)
 
