@@ -83,8 +83,13 @@ textarea {
 
 #mds li span {
   color: blueviolet;
+  cursor: pointer;
 }
 
-#mds li a:hover {
+#mds li span:hover {
+  color: white;
+}
+
+#mds li :hover {
   background: blueviolet;
 }

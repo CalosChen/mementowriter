@@ -23,7 +23,7 @@ a {
   text-decoration: none;
 }
 
-textarea{
+textarea {
   width: 100%;
 }
 
@@ -86,8 +86,12 @@ textarea{
   }
   span {
     color: blueviolet;
+    cursor: pointer;
   }
-  a:hover {
+  span:hover {
+    color: white;
+  }
+  :hover {
     background: blueviolet;
   }
 }
