@@ -57,6 +57,7 @@
             $.post('/auth', { key }, function (data) {
                 if (data === 'OK')
                     showAdms()
+                    $('.admin').hide()
             })
         }
 
