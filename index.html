@@ -73,7 +73,8 @@
                     break;
                 case 'a':
                     current.name = val
-                    save(current.cate, val, '').then(function () {
+                    var result = save(current.cate, val, '')
+                    if (result) result.then(function () {
                         getMds(current.cate)
                     })
                     break;
