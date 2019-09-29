@@ -42,10 +42,24 @@ function readMdFileToHtml(fileName, folderPath) {
     return html
 }
 
-function readPassFromFs() {
-    var keyPath = path.resolve()
-    return fs.readFileSync(keyPath, 'utf-8')
+function checkVipOrAdmin(req) {
+    var vip = req.signedCookies.vip
+    var username = req.signedCookies.username
+    return vip === 'true' || username === 'admin'
 }
+
+function vipContent(req, callback) {
+    const { cate, name } = req.query
+    var ret = "viponly"
+    if (name.indexOf('vip') !== -1) {
+        if (checkVipOrAdmin(req)) {
+            ret = callback(`${name}`, cate)
+        }
+    }
+    else ret = callback(`${name}`, cate)
+    return ret
+}
+
 
 function main() {
     console.log('Starting web server')
@@ -84,6 +98,11 @@ function main() {
         res.send('OK')
     })
 
+    app.post('/vip', function (req, res, next) {
+        res.cookie("vip", "true", { maxAge: 60 * 60 * 1000, signed: true });
+        res.send('OK')
+    })
+
     app.get('/cates', function (req, res, next) {
         var list = getDirsInDocsFolder()
         res.send(list)
@@ -104,14 +123,12 @@ function main() {
 
 
     app.get('/mdhtml', function (req, res, next) {
-        const { cate, name } = req.query
-        var html = readMdFileToHtml(`${name}`, cate)
+        let html = vipContent(req, readMdFileToHtml)
         res.send(html)
     })
     app.get('/md', function (req, res, next) {
-        const { cate, name } = req.query
-        var md = readMd(`${name}`, cate)
-        res.send(md)
+        let ret = vipContent(req, readMd)
+        res.send(ret)
     })
 
     app.post('/md', function (req, res, next) {
