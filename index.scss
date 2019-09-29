@@ -8,54 +8,86 @@ $common-height: 150px;
 * {
   box-sizing: border-box;
 }
-h1 {
-  color: red;
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: #f1f1f1;
 }
-ul li {
+
+ul {
   list-style-type: none;
 }
-nav {
+a {
+  color: black;
+  text-decoration: none;
+}
+
+textarea{
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-align: right;
-  a {
-    margin-left: 15px;
-    display: block;
-  }
-  a:first-child {
-    margin-left: 0;
-  }
 }
-div {
-  float: left;
-}
-.menu {
-  width: 200px;
-  height: $common-height;
-}
-.main {
-  @include with100minus(200px);
-  @include height100(200px);
-  background-color: orange;
-}
-iframe {
-  width: 100%;
-  min-height: 500px;
-}
-footer {
-  position: fixed;
-  bottom: 0px;
+
+// 头部标题
+.header {
+  padding: 30px;
   text-align: center;
-  width: 100%;
+  background: white;
+  h1 {
+    font-size: 50px;
+  }
 }
-button {
-  border-radius: 5px;
-}
-#cates {
-  li {
+//导航条
+.topnav {
+  overflow: hidden;
+  background: blueviolet;
+  a {
     float: left;
-    margin-left: 15px;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  a:hover {
+    background: #ddd;
+    color: black;
+  }
+}
+// 创建两列
+//left column
+.leftcolumn {
+  float: left;
+  width: 25%;
+}
+//右侧栏
+.rightcolumn {
+  float: left;
+  width: 75%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+#mds li {
+  a {
+    display: inline-block;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  span {
+    color: blueviolet;
+  }
+  a:hover {
+    background: blueviolet;
   }
 }

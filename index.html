@@ -5,37 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Caloch MD Subjects</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" media="screen and (max-width:600px)" href="mobile.css">
+
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <h1>Caloch开洛奇</h1>
-    <nav>
-        <button onclick="add('c',prompt('Category:'));">+</button>
-        <ul id="cates">
-            <li><a href="#" data-cate="cate">cate</a></li>
-        </ul>
-    </nav>
-    <hr>
-    <div class="menu">
-        <button onclick="add('a',prompt('Name:'));">+</button>
-        <ul id="mds">
-            <li><a href="view.html?name='a1'" target="mainframe">文章.1</a></li>
-        </ul>
+    <div class="header">
+        <h1>Caloch开洛奇</h1>
+        <div class="topnav">
+            <button style="float:right;" onclick="add('c',prompt('Category:'));">+</button>
+            <ul id="cates">
+                <li><a href="#" data-cate="cate">cate</a></li>
+            </ul>
+        </div>
     </div>
-    <div id="main" class="main">
-        <iframe id="#mainframe" name="mainframe" src="" frameborder="0"></iframe>
+    <div class="row">
+        <div class="leftcolumn">
+            <button onclick="add('a',prompt('Name:'));">+</button>
+            <ul id="mds">
+                <li><a href="view.html?name='a1'" target="mainframe">文章.1</a></li>
+            </ul>
+        </div>
+        <div id="main" class="rightcolumn main">
+            <iframe id="#mainframe" name="mainframe" src="" frameborder="0"></iframe>
+        </div>
+        <div id="main1" class="rightcolumn main">
+            <textarea id="content" cols="20" rows="10"></textarea>
+            <button id="save">Save</button>
+        </div>
     </div>
-    <div id="main1" class="main">
-        <textarea id="content" cols="20" rows="10"></textarea>
-        <button id="save">Save</button>
-    </div>
-    <footer>
+    <div class="footer">
         ©Caloch开洛奇 2019~
         <span id="today"></span>
-    </footer>
+    </div>
     <script>
         var current = {}
 
