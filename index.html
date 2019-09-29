@@ -57,7 +57,7 @@
             $.post('/auth', { key }, function (data) {
                 if (data === 'OK')
                     showAdms()
-                    $('.admin').hide()
+                $('.admin').hide()
             })
         }
 
@@ -128,7 +128,7 @@
         function save(cate, name, content) {
             if (!name) return
             return $.post('/md', { cate, name, content }, function (data) {
-
+                if (data === 'OK') alert('Success')
             })
         }
 

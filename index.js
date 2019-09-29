@@ -117,7 +117,7 @@ function main() {
     app.post('/md', function (req, res, next) {
         const { cate, name, content } = req.body
         writeMdFile(cate, name, content)
-        res.send(content)
+        res.send('OK')
 
     })
 
