@@ -63,7 +63,7 @@ function main() {
 
     app.use(function (req, res, next) {
         var username = req.signedCookies.username
-        if (req.method === 'POST' && !username && req.url !== '/auth') {
+        if (req.method === 'POST' && username !== 'admin' && req.url !== '/auth') {
             res.send('Unauthorized.')
             res.end()
         }
@@ -72,9 +72,11 @@ function main() {
 
 
     app.post('/auth', function (req, res, next) {
-        if (req.body.key === config.pass)
+        if (req.body.key === config.pass) {
             res.cookie("username", "admin", { maxAge: 60 * 60 * 1000, signed: true });
-        res.send('OK')
+            res.send('OK')
+        }
+        else res.send('Failure.')
     })
 
     app.get('/logout', function (req, res, next) {

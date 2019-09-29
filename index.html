@@ -13,7 +13,11 @@
 </head>
 
 <body>
+
     <div class="header">
+        <div class="admin" style="float: right;"><input type="password" id="pass" /> <a href="javascript:void(0);"
+                onclick="auth()">Auth</a>
+        </div>
         <h1>Caloch开洛奇</h1>
         <div class="topnav">
             <button style="float:right;" onclick="add('c',prompt('Category:'));">+</button>
@@ -44,7 +48,12 @@
     <script>
         var current = {}
 
-        function admin(key) {
+        function admin() {
+            $(".admin").show()
+        }
+
+        function auth() {
+            var key = $('#pass').val()
             $.post('/auth', { key }, function (data) {
                 if (data === 'OK')
                     showAdms()
@@ -103,14 +112,14 @@
         }
 
         function getMdHtml(cate, name) {
-            $.get('/mdhtml?cate=' + cate + '&name=' + name, function (data) {
+            return $.get('/mdhtml?cate=' + cate + '&name=' + name, function (data) {
                 let $el = $('#main')
                 $el.html(data)
             })
         }
 
         function getMd(cate, name, callback) {
-            $.get('/md?cate=' + cate + '&name=' + name, function (data) {
+            return $.get('/md?cate=' + cate + '&name=' + name, function (data) {
                 let $el = $('#content')
                 $el.text(data)
             })
@@ -157,6 +166,7 @@
             hideAdms()
             $('#today').timelyfy()
             $('#main1').hide()
+            $('.admin').hide()
             getCates()
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
@@ -168,14 +178,14 @@
                 current.name = $this.data().name
                 console.log(current);
 
-                getMdHtml(current.cate, current.name)
-                showContent()
+                getMdHtml(current.cate, current.name).then(() => showContent())
 
             })
             $('#mds').on('click', 'span', function () {
                 let $this = $(this)
-                getMd(current.cate, $this.data().name)
-                showEditor()
+                getMd(current.cate, $this.data().name).then(function () {
+                    showEditor()
+                })
             })
             $('#save').on('click', function () {
                 save(current.cate, current.name, $('#content').val())
