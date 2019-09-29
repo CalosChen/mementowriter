@@ -66,6 +66,7 @@ textarea {
   content: "";
   display: table;
   clear: both;
+  min-height: 140px;
 }
 
 .footer {
