@@ -98,7 +98,7 @@ textarea {
 }
 
 // 屏幕尺寸小于400px时，导航等布局改为上下布局
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   //屏幕尺寸小于 600px时，两列布局改为上下布局
   .leftcolumn,
   .rightcolumn {
