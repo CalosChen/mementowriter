@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Caloch MD Subjects</title>
+    <link rel="stylesheet" href="index.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="admin" style="float: right;"><input type="password" id="pass" /> <a href="javascript:void(0);"
+                onclick="auth()">Auth</a>
+        </div>
+        <h1>Caloch开洛奇</h1>
+        <div class="topnav">
+            <button style="float:right;" onclick="add('c',prompt('Category:'));">+</button>
+            <ul id="cates">
+                <li><a href="#" data-cate="cate">cate</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="leftcolumn">
+            <button onclick="add('a',prompt('Name:'));">+</button>
+            <ul id="mds">
+                <li><a href="view.html?name='a1'" target="mainframe">文章.1</a></li>
+            </ul>
+        </div>
+        <div id="main" class="rightcolumn main">
+            <iframe id="#mainframe" name="mainframe" src="" frameborder="0"></iframe>
+        </div>
+        <div id="main1" class="rightcolumn main">
+            <textarea id="content" cols="20" rows="10"></textarea>
+            <button id="save">Save</button>
+        </div>
+    </div>
+    <div class="footer">
+        ©Caloch开洛奇 2019~
+        <span id="today"></span>
+    </div>
+    <script>
+        var current = {}
+
+        function admin() {
+            $(".admin").show()
+        }
+
+        function auth() {
+            var key = $('#pass').val()
+            $.post('/auth', { key }, function (data) {
+                if (data === 'OK')
+                    showAdms()
+                $('.admin').hide()
+            })
+        }
+
+        function add(key, val) {
+            switch (key) {
+                case 'c':
+                    if (val) {
+                        mkCate(val).then(function () {
+                            getCates()
+                        })
+
+                    }
+                    break;
+                case 'a':
+                    current.name = val
+                    var result = save(current.cate, val, '')
+                    if (result) result.then(function () {
+                        getMds(current.cate)
+                    })
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        function getCates() {
+            $.get('/cates', function (data) {
+                let $el = $('#cates')
+                $el.empty()
+                data.forEach(cate => {
+                    $el.append(`<li><a href="#" data-cate="${cate}">${cate}</a></li>`);
+                });
+                current.cate = data[0]
+                getMds(data[0])
+            })
+        }
+
+        function mkCate(cate) {
+            if (!cate) return
+            return $.post('/cate', { cate }, function (data) {
+
+            })
+        }
+
+        function getMds(cate) {
+            $.get('/mds?cate=' + cate, function (data) {
+                let $el = $('#mds')
+                $el.empty()
+                data.forEach(function (md) {
+                    $el.append(`<li><a href="javascript:void(0)" data-name=${md} >${md}</a><span data-name=${md}>MD</span></li>`)
+                })
+            })
+        }
+
+        function getMdHtml(cate, name) {
+            return $.get('/mdhtml?cate=' + cate + '&name=' + name, function (data) {
+                let $el = $('#main')
+                $el.html(data)
+            })
+        }
+
+        function getMd(cate, name, callback) {
+            return $.get('/md?cate=' + cate + '&name=' + name, function (data) {
+                let $el = $('#content')
+                $el.val(data)
+            })
+        }
+        function save(cate, name, content) {
+            if (!name) return
+            return $.post('/md', { cate, name, content }, function (data) {
+                if (data === 'OK') alert('Success')
+            })
+        }
+
+        $.fn.timelyfy = function () {
+            let $this = $(this)
+            $this.html(new Date().toLocaleDateString())
+        }
+
+        function showContent() {
+            $('#main').show()
+            $('#main1').hide()
+        }
+
+        function showEditor() {
+            $('#main1').show()
+            $('#main').hide()
+        }
+
+        function showAdms() {
+            $('button').show()
+        }
+        function hideAdms() {
+            $('button').hide()
+        }
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    console.log(xhr)
+                },
+                dataFilter: function (data) {
+                    console.log(data)
+                    return data
+                }
+            })
+            hideAdms()
+            $('#today').timelyfy()
+            $('#main1').hide()
+            $('.admin').hide()
+            getCates()
+            $('#cates').on('click', 'a', function () {
+                let $this = $(this)
+                current.cate = $this.data().cate
+                getMds(current.cate)
+            })
+            $('#mds').on('click', 'a', function () {
+                let $this = $(this)
+                current.name = $this.data().name
+                console.log(current);
+
+                getMdHtml(current.cate, current.name).then(() => showContent())
+
+            })
+            $('#mds').on('click', 'span', function () {
+                let $this = $(this)
+                getMd(current.cate, $this.data().name).then(function () {
+                    showEditor()
+                })
+            })
+            $('#save').on('click', function () {
+                save(current.cate, current.name, $('#content').val())
+            })
+        })
+
+    </script>
+</body>
+
+</html>
