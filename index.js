@@ -84,9 +84,6 @@ function main() {
         else next()
     })
 
-    app.get('/',function (req,res,next) {
-        res.sendfile("static/index.html")
-    })
 
     app.post('/auth', function (req, res, next) {
         if (req.body.key === config.pass) {
