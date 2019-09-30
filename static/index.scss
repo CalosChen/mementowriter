@@ -62,9 +62,34 @@ textarea {
 //右侧栏
 .rightcolumn {
   float: left;
-  width: 75%;
+  width: 55%;
   background-color: #f1f1f1;
   padding-left: 20px;
+}
+.vip {
+  float: right;
+  width: 20%;
+  padding: 14px 20px;
+  background-color: #f1f1f1;
+  text-align: right;
+  a {
+    display: inline-block;
+    background-color: blueviolet;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    padding: 3px;
+    border-radius: 2px;
+  }
+  a:hover {
+    color: black;
+  }
+  section:before {
+    content: "Amount:";
+  }
+  .pay {
+    display: none;
+  }
 }
 .row:after {
   content: "";
@@ -101,7 +126,8 @@ textarea {
 @media screen and (max-width: 600px) {
   //屏幕尺寸小于 600px时，两列布局改为上下布局
   .leftcolumn,
-  .rightcolumn {
+  .rightcolumn,
+  .vip {
     width: 100%;
     padding: 0;
   }
