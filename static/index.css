@@ -85,7 +85,7 @@ textarea {
 }
 
 .vip section:before {
-  content: "Amount:";
+  content: "Amount(CNY):";
 }
 
 .vip .pay {
