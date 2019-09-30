@@ -123,7 +123,7 @@
         function getMd(cate, name, callback) {
             return $.get('/md?cate=' + cate + '&name=' + name, function (data) {
                 let $el = $('#content')
-                $el.text(data)
+                $el.val(data)
             })
         }
         function save(cate, name, content) {
