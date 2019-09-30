@@ -67,7 +67,7 @@ function main() {
     var cookieParser = require('cookie-parser')
 
     var app = express()
-    app.use(express.static('.'))
+    app.use(express.static('./static'))
 
     const bodyParser = require('body-parser');
     app.use(bodyParser.json());
