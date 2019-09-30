@@ -88,7 +88,7 @@
                 let $el = $('#cates')
                 $el.empty()
                 data.forEach(cate => {
-                    $el.append(`<li><a href="#" data-cate="${cate}">${cate}</a></li>`);
+                    $el.append(`<li><a href="javascript:void(0);" data-cate="${cate}">${cate}</a></li>`);
                 });
                 current.cate = data[0]
                 getMds(data[0])
