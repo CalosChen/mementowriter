@@ -104,6 +104,9 @@ textarea {
   text-align: center;
   background: #ddd;
   margin-top: 20px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
 }
 
 #mds li a {
