@@ -135,7 +135,7 @@ textarea {
   display: inline-block;
   position: absolute;
   left: 0px;
-  top: 15px;
+  top: 1px;
 }
 .location:before {
   content: "Location:";
@@ -153,8 +153,5 @@ textarea {
   .topnav a {
     float: none;
     width: 100%;
-  }
-  .location {
-    display: none;
   }
 }
