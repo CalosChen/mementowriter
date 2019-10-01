@@ -80,6 +80,11 @@ textarea {
   border-radius: 2px;
 }
 
+.vip img {
+  width: 100%;
+  height: 100%;
+}
+
 .vip a:hover {
   color: black;
 }
