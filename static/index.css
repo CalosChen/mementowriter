@@ -136,6 +136,15 @@ textarea {
   background: blueviolet;
 }
 
+.location {
+  display: inline-block;
+  float: left;
+}
+
+.location:before {
+  content: "Location:";
+}
+
 @media screen and (max-width: 600px) {
   .leftcolumn,
   .rightcolumn,

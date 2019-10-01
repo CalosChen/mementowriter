@@ -54,6 +54,7 @@
     </div>
     </div>
     <div class="footer">
+        <span id="location" class="location"></span>
         ©Caloch开洛奇 2017~
         <span id="today"></span>
     </div>
@@ -185,12 +186,13 @@
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
                 current.cate = $this.data().cate
+                $("#location").text(current.cate)
                 getMds(current.cate)
             })
             $('#mds').on('click', 'a', function () {
                 let $this = $(this)
                 current.name = $this.data().name
-                console.log(current);
+                $('#location').text(`${current.cate}>${current.name}`)
 
                 getMdHtml(current.cate, current.name).then(() => showContent())
 
