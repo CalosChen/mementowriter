@@ -138,7 +138,9 @@ textarea {
 
 .location {
   display: inline-block;
-  float: left;
+  position: absolute;
+  left: 0px;
+  top: 15px;
 }
 
 .location:before {
