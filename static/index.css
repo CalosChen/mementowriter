@@ -115,7 +115,6 @@ textarea {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  position: relative;
 }
 
 #mds li a {
@@ -138,10 +137,8 @@ textarea {
 }
 
 .location {
-  position: absolute;
   display: inline-block;
-  top: 0px;
-  left: 0px;
+  float: left;
 }
 
 .location:before {
