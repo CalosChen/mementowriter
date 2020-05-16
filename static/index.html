@@ -98,7 +98,7 @@
         }
 
         function getCates() {
-            $.get('/cates', function (data) {
+            return $.get('/cates', function (data) {
                 let $el = $('#cates')
                 $el.empty()
                 data.forEach(cate => {
@@ -178,14 +178,15 @@
                     return data
                 }
             })
-            if (document.cookie.indexOf('admin') === -1) {
-                hideAdms()
-                $('#main1').hide()
-                $('.admin').hide()
-            }
+            hideAdms()
+            $('#main1').hide()
+            $('.admin').hide()
+
             $('#today').timelyfy()
 
-            getCates()
+            getCates().then(() => {
+                admin()
+            })
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
                 current.cate = $this.data().cate
