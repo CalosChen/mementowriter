@@ -178,7 +178,9 @@
                     return data
                 }
             })
-            hideAdms()
+            if (document.cookie.indexOf('admin') === -1) {
+                hideAdms()
+            }
             $('#today').timelyfy()
             $('#main1').hide()
             $('.admin').hide()
