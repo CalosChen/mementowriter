@@ -180,10 +180,11 @@
             })
             if (document.cookie.indexOf('admin') === -1) {
                 hideAdms()
+                $('#main1').hide()
+                $('.admin').hide()
             }
             $('#today').timelyfy()
-            $('#main1').hide()
-            $('.admin').hide()
+
             getCates()
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
