@@ -109,6 +109,7 @@ function main() {
     })
 
     app.post('/cate', function (req, res, next) {
+        if(!checkVipOrAdmin(req))return
         const { cate } = req.body
         mkCate(cate)
         res.send(cate)
@@ -132,6 +133,7 @@ function main() {
     })
 
     app.post('/md', function (req, res, next) {
+        if(!checkVipOrAdmin(req))return
         const { cate, name, content } = req.body
         writeMdFile(cate, name, content)
         res.send('OK')
