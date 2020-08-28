@@ -211,7 +211,7 @@
             $('#save').on('click', function () {
                 save(current.cate, current.name, $('#content').val())
             })
-            if(document.cookie.indexOf('username=')!==-1)showAdms()
+            if(document.cookie.indexOf('username=')!==-1){showAdms();$('.admin').hide();}
         })
 
     </script>
