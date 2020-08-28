@@ -60,7 +60,6 @@ textarea {
 .leftcolumn {
   float: left;
   width: 25%;
-  border-right: 1px solid grey;
 }
 //右侧栏
 .rightcolumn {
@@ -68,6 +67,7 @@ textarea {
   width: 55%;
   background-color: #f1f1f1;
   padding-left: 20px;
+  border-left: 1px solid grey;
 }
 .vip {
   float: right;
