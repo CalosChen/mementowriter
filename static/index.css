@@ -118,6 +118,7 @@ textarea {
   position: fixed;
   bottom: 0px;
   width: 100%;
+  font-style:italic;
 }
 
 #mds li a {
