@@ -87,8 +87,11 @@ textarea {
     border-radius: 2px;
   }
   img {
-    width: 80%;
-    height: 80%;
+     position: absolute;
+    float: right;
+    right: 0px;
+    height: 400px;
+    width: 400px;
   }
   a:hover {
     color: black;
