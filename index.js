@@ -9,7 +9,7 @@ var md = new markdown({
 })
 const config = require('./pass.json')
 
-const mdsCache = {}
+var mdsCache = {}
 
 function collectMds() {
     let level1Cates = getDirsInDocsFolder()
@@ -24,7 +24,6 @@ function collectMds() {
 collectMds();
 
 function refreshMdsCache() {
-    delete mdsCache
     mdsCache = {}
     collectMds()
 }
