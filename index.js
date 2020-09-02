@@ -13,7 +13,6 @@ const mdsCache = {}
 
 function collectMds() {
     let level1Cates = getDirsInDocsFolder()
-    console.log(level1Cates)
     level1Cates.forEach(c => {
         mdsCache[c] = {}
         let cateMds = getMdsInFolder(c)
@@ -25,6 +24,7 @@ function collectMds() {
 collectMds();
 
 function refreshMdsCache() {
+    delete mdsCache
     mdsCache = {}
     collectMds()
 }
