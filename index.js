@@ -24,6 +24,11 @@ function collectMds() {
 }
 collectMds();
 
+function refreshMdsCache() {
+    mdsCache = {}
+    collectMds()
+}
+
 function mkCate(cate) {
     fs.mkdir(path.join(basePath, cate), function (err) {
 
@@ -44,7 +49,7 @@ function writeMdFile(folderPath, fileName, content) {
     fs.writeFile(path.join(basePath, folderPath, fileName), content, function (err) {
         console.error(err)
     })
-    updateMdInCache(fileName, folderPath, content)
+    refreshMdsCache()
 }
 
 function readMd(fileName, folderPath) {
@@ -52,9 +57,7 @@ function readMd(fileName, folderPath) {
     return content
 }
 
-function updateMdInCache(fileName, folderPath, content) {
-    mdsCache[folderPath][fileName] = content
-}
+
 function readMdFromCache(fileName, folderPath) {
     return mdsCache[folderPath][fileName]
 }
@@ -135,6 +138,7 @@ function main() {
         if (!checkVipOrAdmin(req)) return
         const { cate } = req.body
         mkCate(cate)
+        refreshMdsCache()
         res.send(cate)
     })
 
@@ -159,6 +163,7 @@ function main() {
         if (!checkVipOrAdmin(req)) return
         const { cate, name, content } = req.body
         writeMdFile(cate, name, content)
+        refreshMdsCache()
         res.send('OK')
 
     })
