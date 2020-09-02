@@ -9,6 +9,21 @@ var md = new markdown({
 })
 const config = require('./pass.json')
 
+const mdsCache = {}
+
+function collectMds() {
+    let level1Cates = getDirsInDocsFolder()
+    console.log(level1Cates)
+    level1Cates.forEach(c => {
+        mdsCache[c] = {}
+        let cateMds = getMdsInFolder(c)
+        cateMds.forEach(md => {
+            mdsCache[c][md] = readMd(md, c)
+        })
+    })
+}
+collectMds();
+
 function mkCate(cate) {
     fs.mkdir(path.join(basePath, cate), function (err) {
 
@@ -29,6 +44,7 @@ function writeMdFile(folderPath, fileName, content) {
     fs.writeFile(path.join(basePath, folderPath, fileName), content, function (err) {
         console.error(err)
     })
+    updateMdInCache(fileName, folderPath, content)
 }
 
 function readMd(fileName, folderPath) {
@@ -36,8 +52,15 @@ function readMd(fileName, folderPath) {
     return content
 }
 
+function updateMdInCache(fileName, folderPath, content) {
+    mdsCache[folderPath][fileName] = content
+}
+function readMdFromCache(fileName, folderPath) {
+    return mdsCache[folderPath][fileName]
+}
+
 function readMdFileToHtml(fileName, folderPath) {
-    var content = readMd(fileName, folderPath)
+    var content = readMdFromCache(fileName, folderPath)
     var html = md.render(content)
     return html
 }
@@ -109,7 +132,7 @@ function main() {
     })
 
     app.post('/cate', function (req, res, next) {
-        if(!checkVipOrAdmin(req))return
+        if (!checkVipOrAdmin(req)) return
         const { cate } = req.body
         mkCate(cate)
         res.send(cate)
@@ -128,12 +151,12 @@ function main() {
         res.send(html)
     })
     app.get('/md', function (req, res, next) {
-        let ret = vipContent(req, readMd)
+        let ret = vipContent(req, readMdFromCache)
         res.send(ret)
     })
 
     app.post('/md', function (req, res, next) {
-        if(!checkVipOrAdmin(req))return
+        if (!checkVipOrAdmin(req)) return
         const { cate, name, content } = req.body
         writeMdFile(cate, name, content)
         res.send('OK')
