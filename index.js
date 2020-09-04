@@ -138,8 +138,6 @@ function main() {
     })
 
     app.get('/cates', function (req, res, next) {
-        collectMds()
-        console.log(mdsCache)
         var list = getDirsInDocsFolder()
         res.send(list)
     })
