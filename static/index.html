@@ -64,6 +64,7 @@
         <span id="location" class="location"></span>
         <span class="copyright">©Caloch开洛奇(<u>家乐陈</u>) 2017~</span>
         <span id="today"></span>
+        <span id="pv"></span>
     </div>
     <script>
         var current = {}
@@ -177,7 +178,7 @@
 
         function pvStat() {
             $.get('pv', function (data) {
-                alert('pv:' + data)
+                $('#pv').text('Visits:' + data)
             })
         }
 
