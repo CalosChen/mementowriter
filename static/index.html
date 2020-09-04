@@ -207,6 +207,7 @@
 
             getCates().then(() => {
                 //admin()
+                pvStat()
             })
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
@@ -235,7 +236,6 @@
                 showAdms()
                 $('.admin').hide()
             }
-            pvStat()
         })
 
     </script>

@@ -36,11 +36,11 @@ function mkCate(cate) {
 }
 
 function getDirsInDocsFolder() {
-    // var paths = fs.readdirSync(basePath)
-    let paths = []
-    for (const k in mdsCache) {
-        paths.push(k)
-    }
+    var paths = fs.readdirSync(basePath)
+    // let paths = []
+    // for (const k in mdsCache) {
+    //     paths.push(k)
+    // }
     return paths
 }
 
@@ -138,6 +138,8 @@ function main() {
     })
 
     app.get('/cates', function (req, res, next) {
+        collectMds()
+        console.log(mdsCache)
         var list = getDirsInDocsFolder()
         res.send(list)
     })
