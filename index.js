@@ -45,11 +45,11 @@ function getDirsInDocsFolder() {
 }
 
 function getMdsInFolder(folderName) {
-    // let paths = fs.readdirSync(path.join(basePath, folderName))
-    let paths = []
-    for (const k in mdsCache[folderName]) {
-        paths.push(k)
-    }
+    let paths = fs.readdirSync(path.join(basePath, folderName))
+    // let paths = []
+    // for (const k in mdsCache[folderName]) {
+    //     paths.push(k)
+    // }
     return paths
 }
 
