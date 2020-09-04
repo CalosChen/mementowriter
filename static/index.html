@@ -175,6 +175,12 @@
             $('button').hide()
         }
 
+        function pvStat() {
+            $.get('pv', function (data) {
+                alert('pv:' + data)
+            })
+        }
+
         $(document).ready(function () {
             $.ajaxSetup({
                 beforeSend: function (xhr, settings) {
@@ -189,6 +195,9 @@
                     return data
                 }
             })
+
+            pvStat()
+
             hideAdms()
             $('#main1').hide()
             $('.admin').hide()

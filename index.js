@@ -8,6 +8,7 @@ var md = new markdown({
     langPrefix: 'code-',
 })
 const config = require('./pass.json')
+const pvPath = './pv.txt'
 
 var mdsCache = {}
 
@@ -175,6 +176,12 @@ function main() {
 
     })
 
+    app.get('pv', function (req, res, next) {
+        let content = fs.readFileSync(pvPath, 'utf-8')
+        let visits = parseInt(content) + 1
+        fs.writeFileSync(pvPath, visits)
+        res.send(visits)
+    })
 
     var server = app.listen(8091, function () {
         const { address, port } = server.address()
