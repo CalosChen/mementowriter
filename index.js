@@ -180,7 +180,7 @@ function main() {
         let content = fs.readFileSync(pvPath, 'utf-8')
         let visits = parseInt(content) + 1
         fs.writeFileSync(pvPath, visits)
-        res.send(visits)
+        res.send(visits.toString())
     })
 
     var server = app.listen(8091, function () {
