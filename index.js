@@ -176,7 +176,7 @@ function main() {
 
     })
 
-    app.get('pv', function (req, res, next) {
+    app.get('/pv', function (req, res, next) {
         let content = fs.readFileSync(pvPath, 'utf-8')
         let visits = parseInt(content) + 1
         fs.writeFileSync(pvPath, visits)
