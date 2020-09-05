@@ -211,7 +211,7 @@
                 let sharpIndex = location.href.indexOf('#')
                 let curCate = location.href.substr(sharpIndex + 1)
                 $('#cates a').filter(function () {
-                    return $(this).text() == curCate
+                    return $(this).text().toLowerCase() == curCate.toLowerCase()
                 }).click()
             })
             $('#cates').on('click', 'a', function () {
