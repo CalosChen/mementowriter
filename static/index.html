@@ -208,6 +208,11 @@
             getCates().then(() => {
                 //admin()
                 pvStat()
+                let sharpIndex = location.href.indexOf('#')
+                let curCate = location.href.substr(sharpIndex + 1)
+                $('#cates a').filter(function () {
+                    return $(this).text() == curCate
+                }).click()
             })
             $('#cates').on('click', 'a', function () {
                 let $this = $(this)
