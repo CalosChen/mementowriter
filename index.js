@@ -54,7 +54,7 @@ function getMdsInFolder(folderName) {
 }
 
 function writeMdFile(folderPath, fileName, content) {
-    fs.writeFile(path.join(basePath, folderPath, fileName), content, function (err) {
+    fs.writeFileSync(path.join(basePath, folderPath, fileName), content, function (err) {
         console.error(err)
     })
     refreshMdsCache()
