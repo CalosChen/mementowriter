@@ -218,6 +218,7 @@
                 let $this = $(this)
                 current.cate = $this.data().cate
                 $("#location").text(current.cate)
+                location.href = location.origin + '/#' + cate
                 getMds(current.cate)
             })
             $('#mds').on('click', 'a', function () {
