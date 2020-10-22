@@ -231,6 +231,7 @@
             })
             $('#mds').on('click', 'span', function () {
                 let $this = $(this)
+                current.name = $this.data().name
                 getMd(current.cate, $this.data().name).then(function () {
                     showEditor()
                 })
