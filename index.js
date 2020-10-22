@@ -121,7 +121,7 @@ function main() {
 
     app.post('/auth', function (req, res, next) {
         if (req.body.key === config.pass) {
-            res.cookie("username", "admin", { maxAge: 60 * 60 * 1000, signed: true });
+            res.cookie("username", "admin", { maxAge: 240 * 60 * 1000, signed: true });
             res.send('OK')
         }
         else res.send('Failure.')
