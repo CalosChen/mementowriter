@@ -233,6 +233,7 @@
                 let $this = $(this)
                 current.name = $this.data().name
                 getMd(current.cate, $this.data().name).then(function () {
+                    $('#location').text(`${current.cate}>${current.name}`)
                     showEditor()
                 })
             })
