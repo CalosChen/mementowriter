@@ -170,7 +170,7 @@ function main() {
     app.post('/md', function (req, res, next) {
         if (!checkVipOrAdmin(req)) return
         const { cate, name, content } = req.body
-        writeMdFile(cate, name, content + '\n\n' + "<font color='red'> Last edit: " + new Date().toString() + "</font>")
+        writeMdFile(cate, name, content + '\n\n' + "<font color='purple'> Last edit: " + new Date().toString() + "</font>")
         refreshMdsCache()
         res.send('OK')
 
