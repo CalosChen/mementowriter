@@ -19,7 +19,7 @@
         <a href="https://github.com/CalosChen/mementowriter"
             style="color:blue;position:absolute;left:30px;font-style:normal;" target="_self">[Source Of
             MementoWriter]</a>
-        <div class="logout" style="float: right;"><a href="/logout">Logout</a>
+        <div class="logout" style="float: right;display: none;"><a href="/logout">Logout</a>
         </div>
         <div class="admin" style="float: right;"><input type="password" id="pass" /> <a href="javascript:void(0);"
                 onclick="auth()">Auth</a>
@@ -76,16 +76,18 @@
         var current = {}
 
         function admin() {
-            $(".admin").show()
+            $(".admin").toggle()
             $(".logout").toggle()
         }
 
         function auth() {
             var key = $('#pass').val()
             $.post('/auth', { key }, function (data) {
-                if (data === 'OK')
+                if (data === 'OK') {
                     showAdms()
-                $('.admin').hide()
+                    $('.admin').hide()
+                    $('.logout').show()
+                }
             })
         }
 
