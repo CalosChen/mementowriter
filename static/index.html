@@ -188,12 +188,21 @@
             })
         }
 
-        setInterval(() => {
+        var tmautosave= setInterval(() => {
             if ($('#main1').css('display') === 'block' && $("#save").css("display") !== 'none') {
                 $('#save').click()
             }
 
         }, 8000);
+
+        function AutoSave() {
+            if ($('#main1').css('display') === 'block' && $("#save").css("display") !== 'none') {
+                $('#save').click()
+            }
+            setTimeout(AutoSave, 8000);
+        }
+
+
 
 
         $(document).ready(function () {
