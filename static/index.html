@@ -150,7 +150,7 @@
         function save(cate, name, content) {
             if (!name) return
             return $.post('/md', { cate, name, content }, function (data) {
-                if (data === 'OK') alert('Success')
+                if (data === 'OK') console.log('Create cate success')
             })
         }
 
@@ -181,6 +181,8 @@
                 $('#pv').text('Visits:' + data)
             })
         }
+
+        
 
         $(document).ready(function () {
             $.ajaxSetup({
