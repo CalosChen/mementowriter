@@ -19,9 +19,12 @@
         <a href="https://github.com/CalosChen/mementowriter"
             style="color:blue;position:absolute;left:30px;font-style:normal;" target="_self">[Source Of
             MementoWriter]</a>
+        <div class="logout" style="float: right;display:none;"><a href="/logout">Logout</a>
+        </div>
         <div class="admin" style="float: right;"><input type="password" id="pass" /> <a href="javascript:void(0);"
                 onclick="auth()">Auth</a>
         </div>
+
         <a href="http://www.caloch.cn">
             <h1>Calo佳乐软件技术研究院</h1>
         </a>This free website aims at helping people know they can understand knowledge this way, fast and expressive.
@@ -74,6 +77,7 @@
 
         function admin() {
             $(".admin").show()
+            $(".logout").toggle()
         }
 
         function auth() {
@@ -188,19 +192,19 @@
             })
         }
 
-        var tmautosave= setInterval(() => {
+        var tmautosave = setInterval(() => {
             if ($('#main1').css('display') === 'block' && $("#save").css("display") !== 'none') {
                 $('#save').click()
             }
 
         }, 8000);
 
-        function AutoSave() {
-            if ($('#main1').css('display') === 'block' && $("#save").css("display") !== 'none') {
-                $('#save').click()
-            }
-            setTimeout(AutoSave, 8000);
-        }
+        // function AutoSave() {
+        //     if ($('#main1').css('display') === 'block' && $("#save").css("display") !== 'none') {
+        //         $('#save').click()
+        //     }
+        //     setTimeout(AutoSave, 8000);
+        // }
 
 
 
