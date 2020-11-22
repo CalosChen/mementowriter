@@ -44,6 +44,7 @@
             <iframe id="#mainframe" name="mainframe" src="" frameborder="0"></iframe>
         </div>
         <div id="main1" class="rightcolumn main">
+            <span id="status"></span>
             <textarea id="content" cols="55" rows="35"></textarea>
             <button id="save">Save</button>
         </div>
@@ -152,7 +153,10 @@
         function save(cate, name, content) {
             if (!name) return
             return $.post('/md', { cate, name, content }, function (data) {
-                if (data === 'OK') console.log('save content success'+new Date().toUTCString())
+                if (data === 'OK') {
+                    console.log('save content success' + new Date().toUTCString())
+                    $('#status').text('Save success:' + new Date().toUTCString())
+                }
             })
         }
 
